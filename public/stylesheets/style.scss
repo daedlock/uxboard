@@ -15,12 +15,12 @@ body {
 
 .navbar {
   height: 105px;
-
+  background: $navbar-bgcolor;
   .navbar-brand{
     font-size: 40px;
     font-weight: bold;
     position: relative;
-    top: 24px;
+    top: 28px;
     left: 20px;
 
     a {
@@ -29,6 +29,32 @@ body {
     .thin {
       color: rgba(255,255,255,.7);
     }
+
+
+  }
+
+  form {
+    position: relative;
+    top: 28px;
+    right:15px;
+    input {
+      height: 20px;
+      border:0 !important;
+      outline: none !important;
+      width: 200px !important;
+      color: white;
+      background: rgba(255,255,255,0.10);
+      border-radius: 40px;
+
+     &:focus {
+       border-width: 0 !important;
+       border-color: rgba(255,255,255,.1) !important;
+       outline-width: 0 !important;
+       box-shadow: none !important;
+     }
+    }
+
+
   }
 }
 

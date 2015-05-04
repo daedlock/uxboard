@@ -3,6 +3,7 @@ html
   head
     title= title
     link(rel='stylesheet', href='/stylesheets/style.css')
+    link(rel='stylesheet', href="/components/animate.css/animate.min.css")
     link(href='http://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css')
   body
     .nav.navbar.navbar-default.navbar-fixed-top.navbar-inverse
@@ -11,11 +12,18 @@ html
         .navbar-brand
           a(href="#") UX
             span.thin Board
+        form.navbar-form.navbar-right(role="search")
+          .form-group
+            input.form-control(placeholder='search')
+
     block content
 
     script(src='/components/jquery/dist/jquery.min.js')
     script(src='/components/masonry/dist/masonry.pkgd.min.js')
+    script(src='/components/wow/dist/wow.min.js')
+
     script.
+      new WOW().init();
       var container = document.querySelector('.articles');
       var msnry = new Masonry(container, {
         // options

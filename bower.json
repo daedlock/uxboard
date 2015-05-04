@@ -15,6 +15,8 @@
   ],
   "dependencies": {
     "bootstrap-sass": "~3.3.4",
-    "masonry": "~3.3.0"
+    "masonry": "~3.3.0",
+    "wow": "~1.1.2",
+    "animate.css": "~3.2.6"
   }
 }
