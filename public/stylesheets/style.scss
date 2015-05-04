@@ -3,8 +3,26 @@
 body {
   padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+
+
+}
+
+.container {
+  width:1000px;
+  margin:0 auto;
+}
+
+hr {
+  margin: 5px 0 60px 0;
+  border:0;
+  border-bottom: 1px solid #ddd;
+}
+
+p {
+  color:#666;
 }
 
 a {
-  color: #00B7FF;
+  color: #262626;
+  text-decoration: none;
 }
