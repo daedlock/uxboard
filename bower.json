@@ -1,0 +1,20 @@
+{
+  "name": "uxboard",
+  "version": "0.0.0",
+  "authors": [
+    "Hossam Saraya <hossam.saraya@gmail.com>"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "/public/components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap-sass": "~3.3.4",
+    "masonry": "~3.3.0"
+  }
+}

@@ -3,5 +3,21 @@ html
   head
     title= title
     link(rel='stylesheet', href='/stylesheets/style.css')
+    link(href='http://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css')
   body
+    .nav.navbar.navbar-default.navbar-fixed-top.navbar-inverse
+      .container
+        .navbar-header
+        .navbar-brand
+          a(href="#") UX
+            span.thin Board
     block content
+
+    script(src='/components/jquery/dist/jquery.min.js')
+    script(src='/components/masonry/dist/masonry.pkgd.min.js')
+    script.
+      var container = document.querySelector('.articles');
+      var msnry = new Masonry(container, {
+        // options
+        itemSelector: '.article'
+      });
