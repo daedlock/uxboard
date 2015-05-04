@@ -13,9 +13,25 @@ body {
 
 }
 
+body.dark {
+  background: $body-bgcolor-dark;
+
+  .article {
+    background: $article-bgcolor-dark;
+
+    .title a{
+      color: $title-color-dark !important;
+    }
+
+    .description {
+      color: $body-color-dark;
+    }
+  }
+}
 .navbar {
   height: 105px;
   background: $navbar-bgcolor;
+  border-width: 0;
   .navbar-brand{
     font-size: 40px;
     font-weight: bold;

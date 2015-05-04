@@ -16,5 +16,5 @@ block content
               //span.arrow & rarr;
               //span.source #{article.source}
           h4
-          - article.description = article.description.substr(0, 250) + ((article.description.length > 120) ? "..." : "" );
+          - article.description = article.description.substr(0, 100000) + ((article.description.length > 10000) ? "..." : "" );
           p  #{article.description}

@@ -1960,9 +1960,23 @@ body {
   padding-top: 130px;
 }
 
+body.dark {
+  background: #2D2D2D;
+}
+body.dark .article {
+  background: #3A3A3A;
+}
+body.dark .article .title a {
+  color: rgba(255, 255, 255, 0.56) !important;
+}
+body.dark .article .description {
+  color: rgba(152, 152, 152, 0.8);
+}
+
 .navbar {
   height: 105px;
   background: #3A3A3A;
+  border-width: 0;
 }
 .navbar .navbar-brand {
   font-size: 40px;
