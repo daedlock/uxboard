@@ -7,6 +7,11 @@ html
     link(href='http://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css')
   body
     .nav.navbar.navbar-default.navbar-fixed-top.navbar-inverse
+
+      .switch
+        a
+          img(src="/images/switch.png" width="30")
+
       .container
         .navbar-header
         .navbar-brand
@@ -19,9 +24,20 @@ html
     block content
 
     script(src='/components/masonry/dist/masonry.pkgd.min.js')
+    script(src='/components/jquery/dist/jquery.min.js')
+
     script(src='/components/wow/dist/wow.min.js')
 
     script.
+      $(".switch a").click(function () {
+        if($("body").hasClass("dark")) {
+
+          $("body").removeClass("dark")
+        }
+        else{
+          $("body").addClass("dark")
+        }
+      })
       new WOW().init();
       var container = document.querySelector('.articles');
       var msnry = new Masonry(container, {

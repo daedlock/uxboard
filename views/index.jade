@@ -10,6 +10,11 @@ block content
     .articles
       each article in articles
         .article.wow.zoomIn
+          a.overlay(href= article.url, target="_blank")
+            .content
+              img(src="/images/open.png")
+              div OPEN
+
           .title
             h3
               a(href = article.url, target = '_blank') #{article.title}

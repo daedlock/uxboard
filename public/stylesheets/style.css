@@ -1963,11 +1963,20 @@ body {
 body.dark {
   background: #2D2D2D;
 }
+body.dark .overlay {
+  background: rgba(48, 48, 48, 0.94);
+}
+body.dark .switch img {
+  opacity: .5;
+}
+body.dark .navbar {
+  background: #333333;
+}
 body.dark .article {
-  background: #3A3A3A;
+  background: #353535;
 }
 body.dark .article .title a {
-  color: rgba(255, 255, 255, 0.56) !important;
+  color: rgba(255, 255, 255, 0.8) !important;
 }
 body.dark .article .description {
   color: rgba(152, 152, 152, 0.8);
@@ -1977,6 +1986,11 @@ body.dark .article .description {
   height: 105px;
   background: #3A3A3A;
   border-width: 0;
+}
+.navbar .switch {
+  position: absolute;
+  right: 20px;
+  top: 35px;
 }
 .navbar .navbar-brand {
   font-size: 40px;
@@ -2002,7 +2016,7 @@ body.dark .article .description {
   outline: none !important;
   width: 200px !important;
   color: white;
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba(0, 0, 0, 0.1);
   border-radius: 40px;
 }
 .navbar form input:focus {
@@ -2052,6 +2066,40 @@ span.arrow {
   border-radius: 15px;
   width: 28%;
   margin: 10px;
+  position: relative;
+  overflow: hidden;
+}
+.article:hover .overlay {
+  transform: translateY(0);
+}
+.article .overlay {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  border-radius: 15px;
+  background: rgba(255, 255, 255, 0.94);
+  transform: translateY(100%) translateZ(0);
+  transition: all .3s;
+}
+.article .overlay .content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #16A085;
+  text-align: center;
+}
+.article .overlay .content img {
+  margin-bottom: 10px;
+  width: 30px;
+}
+.article .overlay .content span {
+  color: #16A085;
+  /* OPEN: */
+  font-size: 25px;
+  line-height: 30px;
 }
 .article .title {
   color: #353535;

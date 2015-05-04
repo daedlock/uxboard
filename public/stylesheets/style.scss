@@ -13,9 +13,22 @@ body {
 
 }
 
+body,.article {
+
+}
 body.dark {
   background: $body-bgcolor-dark;
 
+  .overlay {
+    background: rgba(48,48,48,.94);
+
+  }
+  .switch img {
+    opacity: .5;
+  }
+  .navbar {
+    background: $navbar-bgcolor-dark;
+  }
   .article {
     background: $article-bgcolor-dark;
 
@@ -32,6 +45,12 @@ body.dark {
   height: 105px;
   background: $navbar-bgcolor;
   border-width: 0;
+
+  .switch {
+    position: absolute;
+    right: 20px;
+    top: 35px;
+  }
   .navbar-brand{
     font-size: 40px;
     font-weight: bold;
@@ -59,7 +78,7 @@ body.dark {
       outline: none !important;
       width: 200px !important;
       color: white;
-      background: rgba(255,255,255,0.10);
+      background: rgba(0,0,0,.1);
       border-radius: 40px;
 
      &:focus {
@@ -114,7 +133,43 @@ span.arrow{
   border-radius: 15px;
   width: 28%;
   margin: 10px;
+  position: relative;
+  overflow: hidden;
 
+  &:hover {
+    .overlay {
+      transform: translateY(0);
+    }
+  }
+  .overlay {
+    position: absolute;
+    top:0;
+    right:0;
+    left:0;
+    bottom: 0;
+    border-radius: 15px;
+    background: rgba(255,255,255,.94);
+    transform: translateY(100%) translateZ(0);
+    transition: all .3s;
+    .content {
+      position: absolute;
+      top:50%;
+      left:50%;
+      transform: translate(-50%,-50%);
+      color: $green-color;
+      text-align: center;
+      img {
+        margin-bottom: 10px;
+        width: 30px;
+      }
+      span {
+        color: $green-color;
+        /* OPEN: */
+        font-size: 25px;
+        line-height: 30px;
+      }
+    }
+  }
   .title {
     color: $title-color;
     font-size: 18px;
