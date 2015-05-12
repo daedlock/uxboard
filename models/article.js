@@ -6,6 +6,7 @@ var ArticleSchema = mongoose.Schema({
   description: {type: String, index: true},
   source: {type:String},
   url: {type:String,index:{unique:true}},
+  image: {type:String},
   updated_at: { type: Date, default: Date.now }
 });
 
