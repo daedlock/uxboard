@@ -9,7 +9,7 @@ block content
 
     .articles
       each article in articles
-        .article.wow.zoomIn
+        .article.wow.zoomIn(style="background-image:url(#{article.image});background-size:cover")
           a.overlay(href= article.url, target="_blank")
             .content
               img(src="/images/open.png")
