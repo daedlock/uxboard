@@ -8,6 +8,8 @@ Scraper.allScrapers().forEach(function (_Scraper) {
   var s = new _Scraper();
   s.scrape(function (articles) {
     articles.forEach(function (article) {
+      //TODO: Check for article existance thru URL
+
       metaBot.parseArticleMeta(article, function (image) {
         if(image!=null){
           article.image = image;
