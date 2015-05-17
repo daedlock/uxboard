@@ -9,47 +9,81 @@ var MetaBot = require("../lib/MetaBot.js");
 var metaBot = new MetaBot();
 
 //TODO: Use Async
-async.eachSeries(Scraper.allScrapers(), function (_Scraper, callback) {
+//Main scraping tasks, a task for each provider (dribbble,medium..etc)
+var tasks = [];
+
+Scraper.allScrapers().forEach(function (_Scraper) {
     var s = new _Scraper();
-    s.scrape(function (articles) {
-        logger.debug({articles : articles}, "Scraped articels");
-        articles.forEach(function (article) {
-            logger.debug({article : article}, "Parsing meta data for article");
-            metaBot.parseArticleMeta(article, function (image) {
-                if (image != null) {
-                    article.image = image;
-                    var a = new Article(article);
 
-                    //Insert only if it doesn't exist
-                    Article.findOne({url : article.url}, function (err, _article) {
-                        if (err) logger.error({error : err}, "Mongo error while finding article");
-                        if (!_article) {
-                            //Article can be safely inserted now
-                            a.save(function (err) {
-                                if (err)
-                                    logger.error({error : err}, "Mongo error while saving");
-                                else
-                                    logger.debug({article : article}, "Saved article in MongoDB");
 
-                                callback();
+
+    //Each task represents a provider
+    tasks.push(function (callback) {
+        return s.scrape(function (articles) {
+            //Asynchronous subtasks for fetching image meta data
+            var metaTasks = [];
+
+            logger.debug({articles : articles}, "Scraped articles");
+            articles.forEach(function (article) {
+                logger.debug({article : article}, "Parsing meta data for article");
+
+                //Each task represents a meta scraping for an article
+                metaTasks.push(function (_callback) {
+                    metaBot.parseArticleMeta(article, function (image) {
+
+                        //Drop it if we can't get an image for it
+                        if (image != null) {
+                            article.image = image;
+                            var a = new Article(article);
+
+                            //Insert only if it doesn't exist
+                            Article.findOne({url : article.url}, function (err, _article) {
+                                if (err) logger.error({error : err}, "Mongo error while finding article");
+                                if (!_article) {
+                                    //Article can be safely inserted now
+                                    a.save(function (err) {
+                                        if (err)
+                                            logger.error({error : err}, "Mongo error while saving");
+                                        else
+                                            logger.debug({article : article}, "Saved article in MongoDB");
+
+                                        _callback();
+                                        return;
+                                    });
+                                }
+                                else {
+                                    logger.debug({article : article}, "Article already exists in MongoDB, skipping save operation.")
+                                    _callback();
+                                    return;
+                                }
                             });
+
                         }
                         else {
-                            logger.debug({article : article}, "Article already exists in MongoDB, skipping save operation.")
-                            callback();
+                            _callback();
+                            return;
                         }
                     });
-
-                }
-                else {
-                    callback();
-                }
+                });
             });
+
+            async.parallel(metaTasks, function () {
+                //All meta sub tasks have finished, we can now safely finish the parent task
+                callback();
+            })
         });
     });
-}, function () {
-    logger.info("Finished!");
+
+});
+
+async.parallel(tasks, function (err, results) {
+    //All scraping tasks have finished
+
+    if (err) {
+        console.log("err");
+        throw err
+    }
+    logger.info("Finished");
+    process.exit(0);
 })
-
-
 
