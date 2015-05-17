@@ -38,7 +38,7 @@ async.eachSeries(Scraper.allScrapers(), function (_Scraper, callback) {
                             logger.debug({article : article}, "Article already exists in MongoDB, skipping save operation.")
                             callback();
                         }
-                    })
+                    });
 
                 }
                 else {

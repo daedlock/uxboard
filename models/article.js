@@ -1,6 +1,6 @@
 var mongoose = require('mongoose');
 //mongoose.connect("mongodb://localhost/uxboard");
-mongoose.connect("mongodb://root:root@ds031842.mongolab.com:31842/uxboard");
+mongoose.connect(require("../config/database").mongoConnectionString);
 
 var ArticleSchema = mongoose.Schema({
     title       : {type : String, index : true},

@@ -32,3 +32,5 @@ npm-debug.log
 .idea
 
 log
+
+config/database.js
