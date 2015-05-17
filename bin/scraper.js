@@ -8,6 +8,8 @@ var Article = require('../models/article');
 var MetaBot = require("../lib/MetaBot.js");
 
 var metaBot = new MetaBot();
+
+//TODO: Use Async
 Scraper.allScrapers().forEach(function (_Scraper) {
   var s = new _Scraper();
   s.scrape(function (articles) {
@@ -41,7 +43,7 @@ Scraper.allScrapers().forEach(function (_Scraper) {
         }
       });
     });
-  })
+  });
 });
 
 

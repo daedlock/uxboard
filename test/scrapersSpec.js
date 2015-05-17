@@ -40,5 +40,16 @@ describe("Scrapers", function () {
     });
   });
 
+  /* Dribbble */
+  describe("Dribbble", function () {
+    it("has not changed dom structure", function (done) {
+      var bot = new Scraper.DribbbleScraper();
+      bot.scrape(function (articles) {
+        chai.expect(articles).not.to.have.length(0);
+        done();
+      });
+    });
+  });
+
 
 });
