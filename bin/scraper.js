@@ -22,9 +22,7 @@ async.eachSeries(Scraper.allScrapers(), function (_Scraper, callback) {
 
                     //Insert only if it doesn't exist
                     Article.findOne({url : article.url}, function (err, _article) {
-
                         if (err) logger.error({error : err}, "Mongo error while finding article");
-
                         if (!_article) {
                             //Article can be safely inserted now
                             a.save(function (err) {
