@@ -16,30 +16,34 @@ Scraper.allScrapers().forEach(function (_Scraper) {
     var s = new _Scraper();
 
 
-
     //Each task represents a provider
     tasks.push(function (callback) {
         return s.scrape(function (articles) {
             //Asynchronous subtasks for fetching image meta data
-            var metaTasks = [];
+            var subTasks = [];
 
-            logger.debug({articles : articles}, "Scraped articles");
+            //logger.debug({articles : articles}, "Scraped articles");
             articles.forEach(function (article) {
-                logger.debug({article : article}, "Parsing meta data for article");
 
-                //Each task represents a meta scraping for an article
-                metaTasks.push(function (_callback) {
-                    metaBot.parseArticleMeta(article, function (image) {
+                //subtask for each article.
+                //Find in mongo, then query meta image
+                subTasks.push(function (_callback) {
+                    return Article.findOne({url : article.url}, function (err, _article) {
+                        if (err) logger.error({error : err}, "Mongo error while finding article");
 
-                        //Drop it if we can't get an image for it
-                        if (image != null) {
-                            article.image = image;
-                            var a = new Article(article);
+                        //Article doesn't exist
+                        if (!_article) {
+                            logger.debug({article : article}, "Parsing meta data for article");
 
-                            //Insert only if it doesn't exist
-                            Article.findOne({url : article.url}, function (err, _article) {
-                                if (err) logger.error({error : err}, "Mongo error while finding article");
-                                if (!_article) {
+                            //Each task represents a meta scraping for an article
+                            metaBot.parseArticleMeta(article, function (image) {
+
+                                //Drop it if we can't get an image for it
+                                if (image != null) {
+                                    article.image = image;
+                                    var a = new Article(article);
+
+
                                     //Article can be safely inserted now
                                     a.save(function (err) {
                                         if (err)
@@ -50,9 +54,9 @@ Scraper.allScrapers().forEach(function (_Scraper) {
                                         _callback();
                                         return;
                                     });
+
                                 }
                                 else {
-                                    logger.debug({article : article}, "Article already exists in MongoDB, skipping save operation.")
                                     _callback();
                                     return;
                                 }
@@ -60,14 +64,18 @@ Scraper.allScrapers().forEach(function (_Scraper) {
 
                         }
                         else {
+                            logger.debug({article : article}, "Article already exists in MongoDB. Skipping.");
                             _callback();
                             return;
                         }
+
                     });
                 });
+
+
             });
 
-            async.parallel(metaTasks, function () {
+            async.parallel(subTasks, function () {
                 //All meta sub tasks have finished, we can now safely finish the parent task
                 callback();
             })
