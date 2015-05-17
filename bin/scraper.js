@@ -75,7 +75,7 @@ Scraper.allScrapers().forEach(function (_Scraper) {
 
             });
 
-            async.parallel(subTasks, function () {
+            async.series(subTasks, function () {
                 //All meta sub tasks have finished, we can now safely finish the parent task
                 callback();
             })
