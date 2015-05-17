@@ -1,11 +1,12 @@
 var chai = require('chai');
 var expect = chai.expect;
-var chaiHttp = require('chai-http');
 var Scraper = require("../lib/Scraper.js");
 var request = require("request");
 
 describe("Scrapers", function () {
 
+
+  /* Medium */
   describe("Medium", function () {
     it("has not changed dom structure", function (done) {
       var bot = new Scraper.MediumScraper();
@@ -17,7 +18,7 @@ describe("Scrapers", function () {
   });
 
 
-
+  /* RGBToday */
   describe("RGBToday", function () {
     it("has not changed dom structure", function (done) {
       var bot = new Scraper.RGBTodayScraper();
@@ -28,6 +29,7 @@ describe("Scrapers", function () {
     });
   });
 
+  /* SmashingMagazine */
   describe("Smashing Magazine", function () {
     it("has not changed dom structure", function (done) {
       var bot = new Scraper.SmashingMagazineScraper();
