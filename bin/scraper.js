@@ -13,7 +13,6 @@ Scraper.allScrapers().forEach(function (_Scraper) {
   s.scrape(function (articles) {
     logger.debug({articles: articles}, "Scraped articels");
     articles.forEach(function (article) {
-      //TODO: Check for article existance thru URL
       logger.debug({article: article}, "Parsing meta data for article");
       metaBot.parseArticleMeta(article, function (image) {
         if (image != null) {
