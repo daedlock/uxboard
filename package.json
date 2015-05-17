@@ -7,6 +7,7 @@
   },
   "dependencies": {
     "body-parser": "~1.12.0",
+    "bunyan": "^1.3.5",
     "chai": "^2.3.0",
     "chai-http": "^1.0.0",
     "cheerio": "^0.19.0",
