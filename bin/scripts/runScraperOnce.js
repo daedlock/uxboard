@@ -11,7 +11,7 @@ module.exports = function () {
     //TODO: Use Async
     //Main scraping tasks, a task for each provider (dribbble,medium..etc)
     var tasks = [];
-
+    var startTime = new Date();
     Scraper.allScrapers().forEach(function (_Scraper) {
         var s = new _Scraper();
 
@@ -90,8 +90,11 @@ module.exports = function () {
             console.log("err");
             throw err
         }
-        logger.info("Finished");
-        process.exit(0);
+        var now = new Date();
+        var timeDiff = startTime.getTime() - now.getTime();
+        var timeElapsed = Math.abs(timeDiff/1000); //in seconds
+
+        logger.info("Finished. %s seconds elapsed.",timeElapsed);
     });
 
 
