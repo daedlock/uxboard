@@ -3,10 +3,12 @@ var Article = require('../models/article');
 var MetaBot = require("../lib/MetaBot.js");
 var metaBot = new MetaBot();
 
-var s = new Scraper.DribbbleScraper();
+var s = new Scraper.BehanceSraper();
 s.scrape(function (articles) {
     articles.forEach(function (article) {
         //TODO: Check for article existance thru URL
-        console.log(article.url);
+        metaBot.parseArticleMeta(article, function (image) {
+            console.log(image);
+        })
     });
 })
