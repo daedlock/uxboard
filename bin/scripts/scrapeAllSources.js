@@ -1,4 +1,4 @@
-require("../../lib/Constants.js");
+require("../../config/constants.js");
 var Scraper = require('../../lib/Scraper.js');
 var logger = require("../../lib/Logger.js");
 var async = require("async");
